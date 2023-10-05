@@ -23,7 +23,11 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@guards": ["./src/app/routing/website/guards"],
+      "@guards/*": ["./src/app/routing/website/guards/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
