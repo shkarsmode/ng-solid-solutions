@@ -12,7 +12,8 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     imports: [
         CommonModule, 
         AdminAuthRoutingModule,
-        AdminLoginWidgetModule
+        AdminLoginWidgetModule,
+        // AdminAuthStoreModule
     ],
 })
 export class AdminAuthModule {}

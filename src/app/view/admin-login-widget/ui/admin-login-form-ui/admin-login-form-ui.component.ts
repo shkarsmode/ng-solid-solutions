@@ -7,7 +7,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     styleUrls: ['./admin-login-form-ui.component.scss'],
 })
 export class AdminLoginFormUiComponent implements OnInit {
-    @Input() formError: string;
+    @Input() formError: string | null;
+    @Input() isLoading: boolean | null;
     @Output() onSubmitForm: EventEmitter<{ login: string, password: string}> = new EventEmitter();
     @Output() onChangeForm: EventEmitter<void> = new EventEmitter();
 
@@ -27,9 +28,16 @@ export class AdminLoginFormUiComponent implements OnInit {
     }
 
     public onSubmit(): void {
-        if (this.formGroup.invalid || this.formError) return;
+        if (this.isSubmitDisabled) return;
         this.onSubmitForm.emit(this.formGroup.value);
     }
 
-    public onChange = () => this.onChangeForm.emit();
+    public onChange(): void {
+        if (!this.formError) return;
+        this.onChangeForm.emit();
+    }
+
+    public get isSubmitDisabled(): boolean {
+        return this.formGroup.invalid || !!this.formError || !!this.isLoading;
+    }
 }
