@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { AdminLoginWidgetModule } from 'src/app/view/admin-login-widget/admin-login-widget.module';
 import { AdminAuthRoutingModule } from './admin-auth-routing.module';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 
@@ -10,7 +11,8 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     ],
     imports: [
         CommonModule, 
-        AdminAuthRoutingModule
+        AdminAuthRoutingModule,
+        AdminLoginWidgetModule
     ],
 })
 export class AdminAuthModule {}
