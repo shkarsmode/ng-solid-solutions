@@ -1,0 +1,39 @@
+<form 
+	[formGroup]="formGroup" 
+	(ngSubmit)="onSubmit()"
+	(input)="onChange()">
+	<h2>Authorization</h2>
+
+	<mat-form-field>
+		<mat-label>Login</mat-label>
+		<input 
+			matInput 
+			formControlName="login"
+			required>
+		<mat-error>Required</mat-error>
+	</mat-form-field>
+	
+	<mat-form-field>
+		<mat-label>Password</mat-label>
+		<input 
+			matInput
+			formControlName="password"
+			type="password" 
+			required>
+		<mat-error *ngIf="formGroup.hasError('required', 'password')">
+			Required
+		</mat-error>
+		<mat-error *ngIf="formGroup.hasError('minlength', 'password')">
+			Min length 5
+		</mat-error>
+	</mat-form-field>
+
+	<button
+		[disabled]="formGroup.invalid || !!formError"
+		mat-raised-button 
+		color="primary">
+		Sign in
+	</button>
+
+	<mat-error *ngIf="formError">{{ formError }}</mat-error>
+</form>
