@@ -1,5 +1,7 @@
-<app-admin-login-form-ui 
-	[formError]="serverError" 
+<app-admin-login-form-ui
+	*ngIf="loaded$ | async"
+	[isLoading]="loading$ | async"
+	[formError]="serverError$ | async" 
 	(onSubmitForm)="onSubmitForm($event)"
 	(onChangeForm)="onChangeForm()">
 </app-admin-login-form-ui>

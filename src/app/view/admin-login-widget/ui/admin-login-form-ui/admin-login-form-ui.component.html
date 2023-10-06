@@ -29,10 +29,11 @@
 	</mat-form-field>
 
 	<button
-		[disabled]="formGroup.invalid || !!formError"
+		[disabled]="isSubmitDisabled"
 		mat-raised-button 
 		color="primary">
-		Sign in
+		<mat-spinner *ngIf="isLoading; else signIn"></mat-spinner>
+		<ng-template #signIn>Sign in</ng-template>
 	</button>
 
 	<mat-error *ngIf="formError">{{ formError }}</mat-error>
