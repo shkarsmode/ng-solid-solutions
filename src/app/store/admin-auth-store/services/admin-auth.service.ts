@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Inject, Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable, map } from 'rxjs';
+import { BASE_PATH_URL } from 'src/shared/tokens/environment.tokens';
+import { AuthData } from '../store/admin-auth.reducer';
 
 @Injectable({
     providedIn: 'root',
@@ -8,13 +11,21 @@ import { Observable } from 'rxjs';
 export class AdminAuthService {
     constructor(
         private http: HttpClient,
-        // ! inject basePathUrl
+        private jwtHelperService: JwtHelperService,
+        @Inject(BASE_PATH_URL) private basePath: string
     ) {}
 
-    public login(body: { login: string, password: string }): Observable<{ accessToken: string }> {
+    public login(body: { login: string, password: string }): Observable<AuthData> {
         return this.http.post<{ accessToken: string }>(
-            'http://localhost:3000/auth/login', // ! change it on basePathUrl
+            `${this.basePath}/auth/login`,
             body
+        ).pipe(
+            map(res => {
+                const { exp, iat, id } = this.jwtHelperService.decodeToken(res.accessToken);
+                return {
+                    ...res, exp, iat, id
+                }
+            })
         );
     }
 }
