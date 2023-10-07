@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { AuthData } from "./admin-auth.reducer";
 
 export enum ActionTypes {
     Login = '[Admin Auth] Login',
@@ -24,7 +25,7 @@ export const login = createAction(
 
 export const loginSuccess = createAction(
 	ActionTypes.LoginSucess, 
-	props<{ accessToken: string }>()
+	props<AuthData>()
 );
 
 export const loginFailed = createAction(
