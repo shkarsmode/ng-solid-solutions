@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { AdminAuthInterceptor } from './interceptors/admin-auth.interceptor';
 import { AdminAuthEffects } from './store/admin-auth.effects';
 import { ADMIN_AUTH_FEATURENAME, adminAuthReducer } from './store/admin-auth.reducer';
 
 @NgModule({
-    declarations: [],
     imports: [
         CommonModule,
         HttpClientModule,
@@ -16,6 +16,13 @@ import { ADMIN_AUTH_FEATURENAME, adminAuthReducer } from './store/admin-auth.red
             adminAuthReducer
         ),
         EffectsModule.forFeature([AdminAuthEffects])
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AdminAuthInterceptor,
+            multi: true
+        }
     ]
 })
 export class AdminAuthStoreModule {}
