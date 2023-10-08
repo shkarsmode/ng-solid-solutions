@@ -28,4 +28,17 @@ export class AdminAuthService {
             })
         );
     }
+
+    public refresh(): Observable<AuthData> {
+        return this.http.put<{ accessToken: string }>(
+            `${this.basePath}/auth/refresh`, {}
+        ).pipe(
+            map(res => {
+                const { exp, iat, id } = this.jwtHelperService.decodeToken(res.accessToken);
+                return {
+                    ...res, exp, iat, id
+                }
+            })
+        );
+    }
 }
