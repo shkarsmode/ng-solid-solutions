@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, map } from 'rxjs';
-import { BASE_PATH_URL } from 'src/shared/tokens/environment.tokens';
+import { BASE_PATH_URL } from 'src/app/shared/tokens/environment.tokens';
 import { AuthData } from '../store/admin-auth.reducer';
 
 @Injectable({

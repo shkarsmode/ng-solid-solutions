@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { AdminAuthInterceptor } from './interceptors/admin-auth.interceptor';
+import { initAdminAuth } from './store/admin-auth.actions';
 import { AdminAuthEffects } from './store/admin-auth.effects';
 import { ADMIN_AUTH_FEATURENAME, adminAuthReducer } from './store/admin-auth.reducer';
 
@@ -25,4 +26,8 @@ import { ADMIN_AUTH_FEATURENAME, adminAuthReducer } from './store/admin-auth.red
         }
     ]
 })
-export class AdminAuthStoreModule {}
+export class AdminAuthStoreModule {
+    constructor(private store$: Store) {
+        this.store$.dispatch(initAdminAuth());
+    }
+}

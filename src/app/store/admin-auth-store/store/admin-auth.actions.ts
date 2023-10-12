@@ -6,6 +6,9 @@ export enum ActionTypes {
     LoginSucess = '[Admin Auth] Login Success',
     LoginFailed = '[Admin Auth] Login Failed',
     ChangeForm = '[Admin Auth] Change Form',
+    InitAdminAuth = '[Admin Auth] Init Admin Auth',
+    LogoutSuccess = '[Admin Auth] LogoutSuccess',
+	ExtractLoginData = '[Admin Auth] Extract Login Data',
 }
 
 /**
@@ -25,7 +28,7 @@ export const login = createAction(
 
 export const loginSuccess = createAction(
 	ActionTypes.LoginSucess, 
-	props<AuthData>()
+	props<{ authData: AuthData }>()
 );
 
 export const loginFailed = createAction(
@@ -35,4 +38,16 @@ export const loginFailed = createAction(
 
 export const changeForm = createAction(
 	ActionTypes.ChangeForm
+);
+
+export const initAdminAuth = createAction(
+	ActionTypes.InitAdminAuth
+);
+
+export const logoutSuccess = createAction(
+	ActionTypes.LogoutSuccess
+);
+
+export const extractLoginData = createAction(
+	ActionTypes.ExtractLoginData
 );
