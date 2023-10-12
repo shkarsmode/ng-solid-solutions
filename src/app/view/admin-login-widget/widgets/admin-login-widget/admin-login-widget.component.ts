@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { BASE_PATH_URL } from 'src/app/shared/tokens/environment.tokens';
 import { changeForm, login } from 'src/app/store/admin-auth-store/store/admin-auth.actions';
 import * as adminAuth from 'src/app/store/admin-auth-store/store/admin-auth.selectors';
-import { BASE_PATH_URL } from 'src/shared/tokens/environment.tokens';
 
 @Component({
     selector: 'app-admin-login-widget',
