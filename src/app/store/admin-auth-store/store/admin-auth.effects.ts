@@ -35,8 +35,6 @@ export class AdminAuthEffects {
 		ofType(loginSuccess),
 		tap(loginSuccessData => {
 			const { authData } = loginSuccessData;
-			// const authDataFromStorage: AuthData | null = localStorage.getItem('authData');
-			// if (authDataFromStorage?.accessToken === authData.accessToken)
 			localStorage.setItem('authData', JSON.stringify(authData));
 		})
 	), { dispatch: false });
