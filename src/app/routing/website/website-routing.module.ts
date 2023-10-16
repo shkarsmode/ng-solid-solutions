@@ -14,12 +14,14 @@ const routes: Routes = [
     { 
         path: 'admin/auth',
         canActivate: [adminGuestGuard],
+        canMatch: [adminGuestGuard],
         loadChildren: () => import('./routing/admin-auth/admin-auth.module')
             .then(m => m.AdminAuthModule) 
     },
     { 
         path: 'admin',
         canActivate: [adminAuthGuard],
+        canMatch: [adminAuthGuard],
         loadChildren: () => import('./routing/admin/admin.module')
             .then(m => m.AdminModule) 
     },

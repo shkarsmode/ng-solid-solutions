@@ -18,13 +18,13 @@ export const getAdminAuthServerError = createSelector<object, AdminAuthState, st
 	state => state.serverError
 );
 
-export const getAdminAuthAuthData = createSelector<object, AdminAuthState, AuthData | undefined>(
+export const getAdminAuthData = createSelector<object, AdminAuthState, AuthData | undefined>(
 	getFeature,
 	state => state.authData
 );
 
 export const getAdminAuthAccessToken = createSelector<object, AuthData | undefined, string | undefined>(
-	getAdminAuthAuthData,
+	getAdminAuthData,
 	authData => authData && authData.accessToken
 );
 
