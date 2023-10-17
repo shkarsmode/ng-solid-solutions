@@ -64,7 +64,7 @@ export class AdminAuthEffects {
 	));
 
 	public listenAuthorizeEffect$ = createEffect(() => this.actions$.pipe(
-		ofType(initAdminAuth),
+		ofType(loginSuccess, logoutSuccess),
 		switchMap(() => this.store$.pipe(select(getAdminAuthData))),
 		map(authData => !!authData),
 		distinctUntilChanged(),
