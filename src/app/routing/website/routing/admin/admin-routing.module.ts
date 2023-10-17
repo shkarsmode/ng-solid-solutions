@@ -13,6 +13,18 @@ const routes: Routes = [
         component: AdminPageComponent,
         loadChildren: () => import('./routing/dashboard/dashboard.module')
             .then(m => m.DashboardModule)
+    },
+    {
+        path: 'grid/:namespace/:entity',
+        component: AdminPageComponent,
+        loadChildren: () => import('./routing/grid/grid.module')
+            .then(m => m.GridModule)
+    },
+    {
+        path: 'form/:namespace/:entity',
+        component: AdminPageComponent,
+        loadChildren: () => import('./routing/form/form.module')
+            .then(m => m.FormModule)
     }
 ];
 
