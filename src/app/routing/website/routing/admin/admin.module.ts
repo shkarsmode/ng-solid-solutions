@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AdminFooterWidgetModule } from 'src/app/view/admin-footer-widget/admin-footer-widget.module';
 import { AdminHeaderWidgetModule } from 'src/app/view/admin-header-widget/admin-header-widget.module';
+import { AdminNavWidgetModule } from 'src/app/view/admin-nav-widget/admin-nav-widget.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
@@ -14,7 +15,8 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
         CommonModule, 
         AdminRoutingModule,
         AdminFooterWidgetModule,
-        AdminHeaderWidgetModule
+        AdminHeaderWidgetModule,
+        AdminNavWidgetModule
     ],
 })
 export class AdminModule {}
