@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { catchError, distinctUntilChanged, filter, first, fromEvent, map, of, skip, switchMap, tap, timer } from 'rxjs';
 import { AdminAuthService } from '../services/admin-auth.service';
-import { extractLoginData, initAdminAuth, login, loginFailed, loginSuccess, logoutSuccess } from './admin-auth.actions';
+import { extractLoginData, initAdminAuth, login, loginFailed, loginSuccess, logout, logoutSuccess } from './admin-auth.actions';
 import { AuthData } from './admin-auth.reducer';
 import { getAdminAuthData, isAuth } from './admin-auth.selectors';
 
@@ -74,7 +74,15 @@ export class AdminAuthEffects {
 				isAuth ? '/admin' : '/admin/auth/login'
 			)
 		)
-	), { dispatch: false })
+	), { dispatch: false });
+
+	public logoutEffect$ = createEffect(() => this.actions$.pipe(
+		ofType(logout),
+		map(() => {
+			localStorage.removeItem('authData');
+			return logoutSuccess();
+		})
+	));
 
     constructor(
 		private actions$: Actions,

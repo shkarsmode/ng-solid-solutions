@@ -3,6 +3,7 @@ import { AuthData } from "./admin-auth.reducer";
 
 export enum ActionTypes {
     Login = '[Admin Auth] Login',
+	Logout = '[Admin Auth] Logout',
     LoginSucess = '[Admin Auth] Login Success',
     LoginFailed = '[Admin Auth] Login Failed',
     ChangeForm = '[Admin Auth] Change Form',
@@ -25,6 +26,10 @@ export const login = createAction(
 	ActionTypes.Login, 
 	props<{ login: string, password: string }>()
 );
+
+export const logout = createAction(
+	ActionTypes.Logout
+)
 
 export const loginSuccess = createAction(
 	ActionTypes.LoginSucess, 
