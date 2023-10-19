@@ -1,34 +1,55 @@
-import { NestedTreeControl } from '@angular/cdk/tree';
 import { Component } from '@angular/core';
-import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { Observable, delay, of } from 'rxjs';
+import { INestedTreeNode } from '../../models/INestedTreeNode';
 
-interface FoodNode {
-    name: string;
-    children?: FoodNode[];
-}
-
-const TREE_DATA: FoodNode[] = [
+const TREE_DATA: INestedTreeNode[] = [
     {
-        name: 'Fruit',
+        name: 'Contents',
         children: [
-            { name: 'Apple' },
-            { name: 'Banana' },
-            { name: 'Fruit loops' },
-        ],
-    },
-    {
-        name: 'Vegetables',
-        children: [
-            {
-                name: 'Green',
-                children: [{ name: 'Broccoli' }, { name: 'Brussels sprouts' }],
+            { 
+                name: 'Pages',
+                href: '/admin/grid/content/pages' 
             },
-            {
-                name: 'Orange',
-                children: [{ name: 'Pumpkins' }, { name: 'Carrots' }],
+            { 
+                name: 'Posts',
+                href: '/admin/grid/content/posts' 
+            },
+            { 
+                name: 'Comments',
+                href: '/admin/grid/content/comments'
             },
         ],
     },
+    {
+        name: 'Users',
+        icon: 'perm_identity',
+        children: [
+            { 
+                name: 'Admin',
+                icon: 'manage_accounts',
+                href: '/admin/grid/accounts/admins'
+            },
+            { 
+                name: 'Users',
+                icon: 'face',
+                href: '/admin/grid/accounts/users'
+            }
+        ],
+    },
+    {
+        name: 'Settings',
+        icon: 'settings',
+        children: [
+            { 
+                name: 'General',
+                href: '/admin/form/settings/general'
+            }, 
+            { 
+                name: 'Catalog',
+                href: '/admin/form/settings/catalog'
+            }
+        ]
+    }
 ];
 
 @Component({
@@ -37,12 +58,10 @@ const TREE_DATA: FoodNode[] = [
     styleUrls: ['./admin-nav-widget.component.scss'],
 })
 export class AdminNavWidgetComponent {
-    public treeControl = new NestedTreeControl<FoodNode>(node => node.children);
-    public dataSource = new MatTreeNestedDataSource<FoodNode>();
+    public data: Observable<INestedTreeNode[]> = of<INestedTreeNode[]>(TREE_DATA).pipe(delay(500));
 
-    constructor() {
-        this.dataSource.data = TREE_DATA;
-    }
+    constructor() {}
 
-    public hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
+    public hasChild = (_: number, node: INestedTreeNode) => 
+        !!node.children && node.children.length > 0;
 }

@@ -1,5 +1,4 @@
-<app-admin-nested-tree-ui 
-	[treeControl]="treeControl"
-	[dataSource]="dataSource"
+<app-admin-nested-tree-ui
+	[nodes]="data | async"
 	[hasChild]="hasChild">
 </app-admin-nested-tree-ui>
